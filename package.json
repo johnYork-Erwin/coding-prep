@@ -4,13 +4,14 @@
   "private": true,
   "dependencies": {
     "knex": "^0.13.0",
-    "psql": "0.0.1",
+    "pg": "^7.3.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14"
   },
   "scripts": {
+    "knex": "knex",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
