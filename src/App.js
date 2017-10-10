@@ -3,6 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Splash from './components/Splash.js';
 import Head from './components/Head.js';
+import NewQ from './components/NewQ.js';
+import specificQ from './components/specificQ.js';
 
 class App extends Component {
   constructor(props) {
@@ -15,20 +17,24 @@ class App extends Component {
 
 
   logIn() {
-    this.setState(prevState => ({
-      loggedIn: !prevState.loggedIn
-    }))
+    this.setState({
+      loggedIn: !this.state.loggedIn
+    })
   }
 
   render() {
     return (
       <div>
-        <Head loggedIn={this.state.loggedIn} logIn={this.logIn}></Head>
         <Router>
           <div>
             <Route path="/" exact={true} render={() => (
-              <Splash loggedIn={this.state.loggedIn}></Splash>
+              <div>
+                <Head loggedIn={this.state.loggedIn} logIn={this.logIn}></Head>
+                <Splash loggedIn={this.state.loggedIn}></Splash>
+              </div>
             )} />
+            <Route path="/newQ" exact={true} component={NewQ} />
+            <Route path="/:id" component={specificQ}/>
           </div>
         </Router>
       </div>
