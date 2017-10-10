@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 function ExtraInfo(props) {
   if (props.extraInfo) {
-    console.log('returning some stuff!');
     return (
       <div>
         <p>Difficulty: {props.question.difficulty}</p>
@@ -47,15 +46,12 @@ class Prompt extends React.Component {
   }
 
   extras() {
-    console.log('entered the extras function');
     this.setState({
       extraInfo: !this.state.extraInfo
     })
-    console.log(this.state);
   }
 
   render() {
-    console.log(this.state.extraInfo)
     return (
       <div className="container">
         <p>Prompt: {this.state.question.prompt}</p>
