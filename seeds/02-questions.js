@@ -5,7 +5,8 @@ const questions = [ {
     'difficulty': 'casual',
     'language': 'JavaScript',
     'title': 'Off With The Head!',
-    'created_by': null
+    'created_by': null,
+    'duration': 30
   }, {
     'prompt': "Write a function that accepts an integer and returns a boolean expressing whether or not that number is prime.",
     'answer': "function isPrime(int) {let end = Math.floor(Math.sqrt(int)); for (let i = 2; i < end; i++) {if (int/i % 1 === 0) return true}; return false;}",
@@ -13,7 +14,8 @@ const questions = [ {
     'difficulty': 'casual',
     'language': 'JavaScript',
     'title': 'Is It Prime?',
-    'created_by': null
+    'created_by': null,
+    'duration': 30
   }
 ];
 

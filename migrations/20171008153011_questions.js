@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
     table.text('answer').notNullable();
     table.text('prompt').notNullable();
     table.text('expected_outputs').notNullable();
+    table.integer('duration').notNullable();
   });
 };
 

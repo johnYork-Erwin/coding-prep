@@ -10,7 +10,7 @@ class Results extends React.Component {
   back() {
     window.location.href="/";
   }
-
+  
   render() {
     return (
       <div>

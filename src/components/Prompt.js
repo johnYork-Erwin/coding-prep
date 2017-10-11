@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 function ExtraInfo(props) {
   if (props.extraInfo) {
@@ -42,7 +43,19 @@ class Prompt extends React.Component {
   }
 
   getQuestion() {
-      //do stuff to grab a new question
+    let questions;
+    return axios.get('/questions')
+      .then((response) => {
+        let length = response.data.length;
+        let index = Math.floor(Math.random()*length);
+        console.log(index)
+        this.setState({
+          question: response.data[index]
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   extras() {
@@ -54,6 +67,7 @@ class Prompt extends React.Component {
   render() {
     return (
       <div className="container">
+        <h3 className="center">Title: {this.state.question.title}</h3>
         <p>Prompt: {this.state.question.prompt}</p>
         <p>Example Outputs: {this.state.question.expected_outputs}</p>
         <ExtraInfo extraInfo={this.state.extraInfo} question={this.state.question}/>

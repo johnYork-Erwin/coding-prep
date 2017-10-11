@@ -1,5 +1,9 @@
 'use strict';
 
+if (process.env.NODE_ENV !== 'development') {
+  require('dotenv').config();
+}
+
 const express = require('express')
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -14,14 +18,31 @@ app.use(cookie());
 const users = require('./routes/users')
 const results = require('./routes/results')
 const questions = require('./routes/questions')
+const token = require('./routes/token')
 
 app.use(users)
 app.use(results)
 app.use(questions)
+app.use(token)
 
 app.use((req, res) => {
   res.sendStatus(404);
 });
+
+// Handle Boom errors
+app.use((err, _req, res, _next) => {
+  console.log('boom error!')
+  if (err.output && err.output.statusCode) {
+    return res
+      .status(err.output.statusCode)
+      .set('Content-Type', 'text/plain')
+      .send(err.message);
+  }
+
+  console.error(err.stack);
+  res.sendStatus(500);
+});
+
 
 const port = process.env.PORT || 3001;
 
