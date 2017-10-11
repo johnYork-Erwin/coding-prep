@@ -9,7 +9,6 @@ const router = express.Router();
 
 router.post('/token', (req, res, next) => {
   let user;
-  console.log('1')
   const username = req.body.username;
   const password = req.body.password;
   knex('users').where('username', username).first()
@@ -42,7 +41,6 @@ router.post('/token', (req, res, next) => {
 })
 
 router.get('/token', (req, res) => {
-  console.log('found route')
   jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
       return res.send(false);

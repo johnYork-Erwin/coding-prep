@@ -1,12 +1,9 @@
 import React from 'react';
 import Stats from './Stats.js';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 class Splash extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   render(){
     let subSection = 'Not Logged In'
     if (this.props.loggedIn) {
@@ -37,6 +34,7 @@ class Splash extends React.Component {
           </select>
         </form>
         <button><Link to={'/1/prompt'}>Get Question</Link></button>
+        <h4 className="center">Personal Progress</h4>
         <div>{subSection}</div>
       </div>
     );

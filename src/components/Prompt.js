@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 function ExtraInfo(props) {
@@ -43,12 +43,10 @@ class Prompt extends React.Component {
   }
 
   getQuestion() {
-    let questions;
     return axios.get('/questions')
       .then((response) => {
         let length = response.data.length;
         let index = Math.floor(Math.random()*length);
-        console.log(index)
         this.setState({
           question: response.data[index]
         })

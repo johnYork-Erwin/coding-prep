@@ -8,8 +8,6 @@ import LogIn from './components/LogIn.js';
 import axios from 'axios';
 
 function Head(props) {
-
-
   return (
     <header>
       <button className="right" onClick={() => {props.logIn()}}>{props.loggedIn ? 'Log Out' : 'Log In'}
@@ -28,8 +26,31 @@ class App extends Component {
   }
 
   logIn() {
-    this.setState({loggedIn: !this.state.loggedIn})
-    // window.location.href='/login';
+    if (!this.state.loggedIn) {
+      window.location.href='/login';
+    } else {
+      axios.delete('/token')
+        .then((result) => {
+          this.setState({
+            loggedIn: false
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }
+
+  componentWillMount() {
+    axios.get('/token')
+      .then((response) => {
+        this.setState({
+          loggedIn: response.data
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   render() {

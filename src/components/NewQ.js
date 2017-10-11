@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 class NewQ extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: undefined,
       answer: undefined,
       prompt: undefined,
       expected_outputs: undefined,
@@ -26,8 +25,12 @@ class NewQ extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state)
-    axios.post('/questions', this.state)
+    let valid = true;
+    for (let key in this.state) {
+      if (!this.state[key]) valid = false;
+    }
+    if (valid) {
+      axios.post('/questions', this.state)
       .then((response) => {
         console.log('success!')
         window.location.href="/";
@@ -35,6 +38,7 @@ class NewQ extends React.Component {
       .catch((err) => {
         console.log(err)
       })
+    }
   }
 
   render() {

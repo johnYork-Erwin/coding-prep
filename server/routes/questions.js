@@ -9,7 +9,7 @@ const router = express.Router();
 const authorize = function(req, res, next) {
   jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
-      return next(boom.create(401, 'Can not log high score, you are not logged in!'));
+      return next(boom.create(401, 'You are not logged in!'));
     }
     req.claim = payload;
     return next();
@@ -24,7 +24,14 @@ router.get('/questions', (req, res, next) => {
     .catch((err) => next(err));
 })
 
-//NEED TO ADD AUTHORIZE HERE!
+router.get('/questions/:id', (req, res, next) => {
+  knex('questions').where('id', req.params.id)
+    .then((question) => {
+      res.send(question);
+    })
+    .catch((err) => next(err));
+})
+
 router.post('/questions', authorize, (req, res, next) => {
   const toInsert = {
     'answer': req.body.answer,
@@ -34,8 +41,7 @@ router.post('/questions', authorize, (req, res, next) => {
     'language': req.body.language,
     'title': req.body.title,
     'duration': req.body.duration,
-    'created_by': null
-    // 'created_by': req.claim.userId,
+    'created_by': req.claim.userId,
   }
   knex('questions').insert(toInsert, '*')
     .then((result) => {

@@ -13,6 +13,7 @@ class LogIn extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+
   handleChange = function(e) {
     const object = {}
     const title = e.target.name;

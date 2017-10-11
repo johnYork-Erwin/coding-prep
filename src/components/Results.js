@@ -1,39 +1,90 @@
-import React, { Component } from 'react';
+import React from 'react';
+import axios from 'axios'
 
 class Results extends React.Component {
 
   constructor() {
     super();
+    this.state = {
+      question: undefined,
+
+    };
     this.back = this.back.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentWillMount() {
+    let questionId = this.props.match.params.id;
+    axios.get(`/questions/${questionId}`)
+      .then((response) => {
+        this.setState({
+          question: response.data[0]
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    let form = event.target
+    if (form.success.value && form.duration.value) {
+      let answer = null;
+      if (form.answer.value !== "") {
+        answer = form.answer.value
+      }
+      let object = {
+        'question_id': this.state.question.id,
+        'time_taken': form.duration.value,
+        'correct': form.success.value,
+        'attempted_at': new Date(),
+        'answer': answer,
+      }
+      axios.post('/results', object)
+        .then(() => this.back())
+        .catch((err) => console.log(err))
+    }
   }
 
   back() {
     window.location.href="/";
   }
-  
+
   render() {
+    if (this.state.question === undefined) {
+      return null
+    }
     return (
       <div>
         <h1 className="center">How did you do?</h1>
+        <h4 className="center">Title: {this.state.question.title}</h4>
+        <h5>Prompt: {this.state.question.prompt}</h5>
+        <h4 className="center">Example Solution</h4>
+        <div>
+          {this.state.question.answer}
+        </div>
+        <br/>
         <form name="form" onSubmit={ (event) => this.handleSubmit(event) }>
           <label>
             Success?
           </label>
           <select name="success">
-            <option value="Yes">Yes</option>
-            <option selected value="No">No</option>
+            <option value={true}>Yes</option>
+            <option value={false}>No</option>
           </select>
 
           <label>
             Minutes Spent
           </label>
           <input type="number" name="duration"/>
+          <label>
+            Your answer
+          </label>
+          <input type="text" name="answer"/>
+          <button type="submit">Submit</button>
 
         </form>
-
-        <h4 className="center">Example Solution</h4>
-        <div>
-        </div>
         <button onClick={this.back}>Done</button>
       </div>
     );
