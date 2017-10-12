@@ -3,7 +3,6 @@ import Stats from './Stats.js';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 
-
 class Splash extends React.Component {
 
   constructor(props) {

@@ -14,6 +14,9 @@ class Stats extends React.Component {
   componentWillMount() {
     axios.get('/results/user')
       .then((response) => {
+        this.setState({
+          attempts: response.data
+        })
         let succeeded = response.data.filter(attempt => attempt.correct)
         succeeded = succeeded.map((success, index) => {
           let location = {
@@ -44,6 +47,7 @@ class Stats extends React.Component {
     if (this.state.succeeded === undefined && this.state.failed === undefined) {
       return null
     }
+    console.log(this.state.attempts)
     return (
       <div>
         <h4 className="center">Successes</h4>
