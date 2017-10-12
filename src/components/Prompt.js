@@ -30,7 +30,6 @@ class Prompt extends React.Component {
   getQuestion() {
     axios.get('/questions')
       .then((response) => {
-        console.log(response.data)
         let index = Math.floor(Math.random()*response.data.length)
         let id = response.data[index].id;
         window.location.href = `/${id}/prompt`;

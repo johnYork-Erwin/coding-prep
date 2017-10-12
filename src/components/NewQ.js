@@ -37,7 +37,6 @@ class NewQ extends React.Component {
     if (valid) {
       axios.post('/questions', this.state)
       .then((response) => {
-        console.log('success!')
         window.location.href="/";
       })
       .catch((err) => {

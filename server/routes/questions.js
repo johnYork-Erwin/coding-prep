@@ -24,10 +24,20 @@ router.get('/questions', (req, res, next) => {
     .catch((err) => next(err));
 })
 
+router.get('/questions/:duration/:language/:difficulty', (req, res, next) => {
+  knex('questions').where('duration', '=', Number(req.params.duration)).andWhere('language', '=', req.params.language)
+    .andWhere('difficulty', '=', req.params.difficulty)
+    .then((questions) => {
+      res.send(questions);
+    })
+    .catch((err) => {
+      next(err);
+    })
+})
+
 router.get('/questions/:id', (req, res, next) => {
   knex('questions').where('id', req.params.id)
     .then((question) => {
-      console.log(question)
       res.send(question);
     })
     .catch((err) => next(err));

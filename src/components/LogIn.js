@@ -27,20 +27,18 @@ class LogIn extends React.Component {
     if (action === 'create') {
       return axios.post('/users', this.state)
         .then((response) => {
-          console.log(response.data);
           return axios.post('/token', this.state)
             .then((response) => {
               window.location.href="/"
             })
             .catch((err) => {
-              console.log(err, 'Error')
+              console.log(err)
             })
         })
         .catch((err) => {
           console.log(err)
         })
     }
-    console.log('logging in', this.state)
     return axios.post('/token', this.state)
       .then((response) => {
         window.location.href="/";
