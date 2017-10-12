@@ -27,6 +27,7 @@ router.get('/questions', (req, res, next) => {
 router.get('/questions/:id', (req, res, next) => {
   knex('questions').where('id', req.params.id)
     .then((question) => {
+      console.log(question)
       res.send(question);
     })
     .catch((err) => next(err));

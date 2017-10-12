@@ -11,7 +11,7 @@ router.post('/users', (req, res, next) => {
   knex('users').where('username', req.body.username).first()
     .then((row) => {
       if (row) {
-        return next(boom.create(400, 'Username is already in use.'))
+        res.send('Username already in use')
       }
       bcrypt.hash(req.body.password, 12)
         .then((password) => {

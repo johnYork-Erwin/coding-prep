@@ -18,42 +18,37 @@ function ExtraInfo(props) {
 class Prompt extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      question: {
-        'prompt': "Write a function that accepts an integer and returns a boolean expressing whether or not that number is prime.",
-        'answer': "function isPrime(int) {let end = Math.floor(Math.sqrt(int)); for (let i = 2; i < end; i++) {if (int/i % 1 === 0) return true}; return false;}",
-        'expected_outputs': "5 => true, 6 => false, 1 => false, 2 => false",
-        'difficulty': 'casual',
-        'language': 'JavaScript',
-        'title': 'Is It Prime?',
-        'created_by': null
-      },
-      extraInfo: false
+      extraInfo: false,
     }
     this.extras = this.extras.bind(this);
     this.finished = this.finished.bind(this);
     this.getQuestion = this.getQuestion.bind(this);
-
-  }
-
-  finished(event) {
-    event.preventDefault();
-    let questionId = this.props.match.params.id;
-    window.location.href=`/${questionId}/results`;
   }
 
   getQuestion() {
-    return axios.get('/questions')
+    axios.get('/questions')
       .then((response) => {
-        let length = response.data.length;
-        let index = Math.floor(Math.random()*length);
-        this.setState({
-          question: response.data[index]
-        })
+        console.log(response.data)
+        let index = Math.floor(Math.random()*response.data.length)
+        let id = response.data[index].id;
+        window.location.href = `/${id}/prompt`;
       })
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  finished(event) {
+    event.preventDefault();
+    let questionId;
+    if (this.props.historic) {
+      questionId = this.props.qId
+    } else {
+      questionId = this.props.match.params.id;
+    }
+    window.location.href=`/${questionId}/results`;
   }
 
   extras() {
@@ -62,18 +57,57 @@ class Prompt extends React.Component {
     })
   }
 
+  componentWillMount() {
+    let qId;
+    if (this.props.historic) {
+      qId = this.props.qId;
+    } else {
+      qId = this.props.match.params.id;
+    }
+    return axios.get(`/questions/${qId}`)
+      .then((result) => {
+        this.setState({
+          question: result.data[0],
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   render() {
+    if (this.state.question === undefined) {
+      return null
+    }
     return (
       <div className="container">
         <h3 className="center">Title: {this.state.question.title}</h3>
         <p>Prompt: {this.state.question.prompt}</p>
         <p>Example Outputs: {this.state.question.expected_outputs}</p>
         <ExtraInfo extraInfo={this.state.extraInfo} question={this.state.question}/>
-        <button onClick={this.extras}> See More </button>
-        <button onClick={this.finished}> Did It! </button>
-        <button onClick={this.getQuestion}> Reroll </button>
-      </div>
+        {
+          this.state.extraInfo &&
+          <button onClick={this.extras}> See Less </button>
+        }
+        {
+          !this.state.extraInfo &&
+          <button onClick={this.extras}> See More </button>
 
+        }
+        {  !this.props.historic &&
+          <div>
+            <button onClick={this.finished}> Did It! </button>
+            <button onClick={this.getQuestion}> Reroll </button>
+          </div>
+        }
+        {
+          this.props.historic &&
+          <div>
+            <button onClick={this.finished}> Redid it! </button>
+          </div>
+        }
+        <button onClick={() => window.location.href='/'}>Back</button>
+      </div>
     );
   }
 }

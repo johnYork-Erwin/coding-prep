@@ -1,6 +1,5 @@
 const date = new Date();
 
-
 const results = {
   'user_id': 1,
   'question_id': 1,

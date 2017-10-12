@@ -14,6 +14,11 @@ class NewQ extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.back = this.back.bind(this)
+  }
+
+  back () {
+    window.location.href = '/'
   }
 
   handleChange = function(e) {
@@ -97,7 +102,7 @@ class NewQ extends React.Component {
           <button type="submit"> Submit! </button>
 
         </form>
-
+        <button onClick={this.back}>Back</button>
       </div>
     );
   }
