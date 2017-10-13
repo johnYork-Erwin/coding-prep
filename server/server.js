@@ -25,9 +25,16 @@ app.use(results)
 app.use(questions)
 app.use(token)
 
+app.use(express.static(path.join(__dirname, "..", "build")));
+
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
+
 app.use((req, res) => {
   res.sendStatus(404);
 });
+
 
 // Handle Boom errors
 app.use((err, _req, res, _next) => {
