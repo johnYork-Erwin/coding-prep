@@ -16,8 +16,10 @@
     "mime": "^2.0.3",
     "nodemon": "^1.12.1",
     "pg": "^7.3.0",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-axios": "^1.0.3",
+    "react-d3": "^0.4.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14"
