@@ -1,7 +1,7 @@
 {
   "engines": {
     "node": "8.2.1",
-    "npm": "5.3.0",
+    "npm": "5.3.0"
   },
   "main": "server/server.js",
   "name": "coding-prep",
