@@ -1,28 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-// import {PieChart} from 'react-d3';
-// var PieChart = require('react-d3').PieChart;
-console.log(React.PropTypes);
-//
-// class Chart extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-//   render() {
-//     console.log(this.props.pieData)
-//     return  (
-//     	<PieChart
-//         data={this.props.pieData}
-//         width={450}
-//         height={400}
-//         radius={110}
-//         innerRadius={20}
-//         sectorBorderColor="white"
-//         title="Pie Chart" />
-//   )}
-// }
-
+import Chart from './Chart.js'
 
 class Stats extends React.Component {
   constructor(props) {
@@ -33,13 +12,13 @@ class Stats extends React.Component {
     }
   }
 
-
   componentWillMount() {
     axios.get('/results/user')
       .then((response) => {
         this.setState({
           pieData: response.data
         })
+        console.log(response.data)
         let succeeded = response.data.filter(attempt => attempt.correct)
         succeeded = succeeded.map((success, index) => {
           let location = {
@@ -71,14 +50,13 @@ class Stats extends React.Component {
     if (this.state.succeeded === undefined && this.state.failed === undefined) {
       return null
     }
-    console.log(this.state.attempts)
     return (
       <div>
         <h4 className="center">Successes</h4>
         <ul>
           {this.state.succeeded}
         </ul>
-        {/* <Chart pieData={this.state.pieData}/> */}
+        <Chart pieData={this.state.pieData}/>
         <h4 className="center">Failures</h4>
         <ul>
           {this.state.failed}

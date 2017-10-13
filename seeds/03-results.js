@@ -6,7 +6,7 @@ const results = {
   'time_taken': 15,
   'correct': true,
   'attempted_at': date,
-  'answer': 'Go fuk urslf'
+  'answer': 'Nevermind dudes'
 }
 
 

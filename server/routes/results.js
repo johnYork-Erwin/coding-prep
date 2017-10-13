@@ -22,7 +22,7 @@ const authorize = function(req, res, next) {
 router.get('/results/user', authorize, (req, res, next) => {
   let user = req.claim.userId;
   knex('results').where('user_id', user).select('results.id', 'results.user_id', 'results.correct', 'results.answer as result_answer', 'results.time_taken', 'results.attempted_at',
-        'questions.id as question_id', 'questions.prompt', 'questions.title')
+        'questions.id as question_id', 'questions.prompt', 'questions.title', 'questions.language', 'questions.difficulty')
       .innerJoin('questions', 'results.question_id', 'questions.id')
       .then((result) => {
       res.send(result);
