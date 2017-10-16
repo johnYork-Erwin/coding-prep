@@ -53,42 +53,41 @@ class Splash extends React.Component {
       <div>
         <h1 className="center">Welcome!</h1>
         <h2 className="center">Lets get you a problem...</h2>
-        <form name="form" onSubmit={this.thisQuestion}>
-          <label>
-            How many minutes do you have?
-          </label>
-          <select name="duration">
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="30">30</option>
-          </select>
-          <label>
-            Difficulty:
-          </label>
-          <select name="difficulty">
-            <option value="Easy">Casual</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Brutal</option>
-          </select>
-          <label>
-            Language:
-          </label>
-          <select name="language">
-            <option value="JavaScript">JavaScript</option>
-            <option value="Ruby">Ruby</option>
-          </select>
-          <button type="submit">Get a Question Like THIS!</button>
+        <form id="wrapperSpecificQ" name="form" onSubmit={this.thisQuestion}>
+          <div id="specificQSelectors">
+            <label className="center">
+              How many minutes do you have?
+            </label>
+            <select name="duration">
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+            </select>
+            <label className="center">
+              Difficulty:
+            </label>
+            <select name="difficulty">
+              <option value="Easy">Casual</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Brutal</option>
+            </select>
+            <label className="center">
+              Language:
+            </label>
+            <select name="language">
+              <option value="JavaScript">JavaScript</option>
+              <option value="Ruby">Ruby</option>
+            </select>
+          </div>
+          <button id="specificQSubmit" type="submit">Get This Question</button>
+          <button id="randomQSubmit" onClick={this.getQuestion}>Get Some Question</button>
+          <div id="none" className="center">{this.state.thereAreNone}</div>
         </form>
-        <div className="center">{this.state.thereAreNone}</div>
-        <button onClick={this.getQuestion}>Get Question</button>
         <h4 className="center">Personal Progress</h4>
         {
-          this.props.loggedIn &&
-          <Stats loggedIn={this.props.loggedIn}/>
-        }
-        {
-          !this.props.loggedIn &&
-          <div>Not Logged In</div>
+          this.props.loggedIn ?
+          <Stats loggedIn={this.props.loggedIn}/> :
+          <div className="center">Not Logged In</div>
         }
       </div>
     );

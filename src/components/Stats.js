@@ -10,6 +10,11 @@ class Stats extends React.Component {
       'succeeded': undefined,
       'failed': undefined,
     }
+    this.newQ = this.newQ.bind(this);
+  }
+
+  newQ() {
+    window.location.href="/newQ"
   }
 
   componentWillMount() {
@@ -18,7 +23,6 @@ class Stats extends React.Component {
         this.setState({
           pieData: response.data
         })
-        console.log(response.data)
         let succeeded = response.data.filter(attempt => attempt.correct)
         succeeded = succeeded.map((success, index) => {
           let location = {
@@ -51,17 +55,23 @@ class Stats extends React.Component {
       return null
     }
     return (
-      <div>
-        <h4 className="center">Successes</h4>
-        <ul>
-          {this.state.succeeded}
-        </ul>
-        <Chart pieData={this.state.pieData}/>
-        <h4 className="center">Failures</h4>
-        <ul>
-          {this.state.failed}
-        </ul>
-        <Link to={'/newQ'}>Add A New Question!</Link>
+      <div id="wrapperStats">
+        <div id="statsSuccesses">
+          <h4 className="center">Successes</h4>
+          <ul>
+            {this.state.succeeded}
+          </ul>
+        </div>
+        <div id="statsPie">
+          <Chart pieData={this.state.pieData}/>
+        </div>
+        <div id="statsFailures">
+          <h4 className="center">Failures</h4>
+          <ul>
+            {this.state.failed}
+          </ul>
+        </div>
+        <button onClick={this.newQ} id="addQ">Add A New Question!</button>
       </div>
     )
   }

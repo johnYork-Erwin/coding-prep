@@ -9,8 +9,8 @@ import axios from 'axios';
 
 function Head(props) {
   return (
-    <header>
-      <button className="right" onClick={() => {props.logIn()}}>{props.loggedIn ? 'Log Out' : 'Log In'}
+    <header className="fullRight">
+      <button onClick={() => {props.logIn()}}>{props.loggedIn ? 'Log Out' : 'Log In'}
       </button>
     </header>
   );
@@ -59,7 +59,7 @@ class App extends Component {
         <Router>
           <div>
             <Route path="/" exact={true} render={() => (
-              <div>
+              <div className="wrapper">
                 <Head loggedIn={this.state.loggedIn} logIn={this.logIn}></Head>
                 <Splash loggedIn={this.state.loggedIn}></Splash>
               </div>

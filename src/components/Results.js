@@ -59,33 +59,43 @@ class Results extends React.Component {
       <div>
         <h1 className="center">How did you do?</h1>
         <h4 className="center">Title: {this.state.question.title}</h4>
-        <h5>Prompt: {this.state.question.prompt}</h5>
+        <h5 className="center">Prompt:</h5>
+        <div className="center sizedResults">
+          {this.state.question.prompt}
+        </div>
         <h4 className="center">Example Solution</h4>
-        <div>
+        <div className="center sizedResults">
           {this.state.question.answer}
         </div>
         <br/>
-        <form name="form" onSubmit={ (event) => this.handleSubmit(event) }>
-          <label>
-            Success?
-          </label>
-          <select name="success">
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
-          </select>
+        <form id="wrapperResults" name="form" onSubmit={ (event) => this.handleSubmit(event) }>
+          <div id="resultsSuccess">
+            <label>
+              Success?
+            </label>
+            <select name="success">
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
+            </select>
+          </div>
 
-          <label>
-            Minutes Spent
-          </label>
-          <input type="number" name="duration"/>
-          <label>
-            Your answer
-          </label>
-          <input type="text" name="answer"/>
-          <button type="submit">Submit</button>
+          <div id="resultsMinutes">
+            <label>
+              Minutes Spent
+            </label>
+            <input type="number" name="duration"/>
+          </div>
+
+          <div id="resultsAnswer">
+            <label>
+              Your answer
+            </label>
+            <textarea type="text" name="answer"/>
+          </div>
+          <button id="resultsSubmit" type="submit">Submit</button>
 
         </form>
-        <button onClick={this.back}>Done</button>
+        <button className="center sizedResults" onClick={this.back}>Back</button>
       </div>
     );
   }

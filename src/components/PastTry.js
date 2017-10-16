@@ -18,25 +18,22 @@ class PastTry extends React.Component {
     return (
       <div>
         <Prompt qId={this.props.match.params.id} historic={true}/>
-        <div>
-          <h4 className="center">Your Last Result</h4>
-          {
-            this.state.result.answer &&
-            <p>Your answer: {this.state.result.answer}</p>
-          }
-          {
-            !this.state.result.answer &&
+        <div id="wrapperPast">
+          <h4 id="pastTitle">Your Last Result</h4>
+          <div id="pastAnswer">{
+            this.state.result.answer ?
+            <p>Your answer: {this.state.result.answer}</p> :
             <p>You didn't input your answer last time you tried this question</p>
           }
+          </div>
+          <div id="pastResult">
           {
-            !this.state.result.correct &&
-            <p>You got it wrong</p>
+            !this.state.result.correct ?
+            <p><strong>You got it wrong</strong></p> :
+            <p><strong>You got it right!</strong></p>
           }
-          {
-            this.state.result.correct &&
-            <p>You got it right!</p>
-          }
-          <p>This attempt occured on: {this.state.result.attempted_at} and it took {this.state.result.time_taken} minutes to complete.</p>
+          </div>
+          <p id="pastInfo">This attempt occured on {this.state.result.attempted_at} and it took {this.state.result.time_taken} minutes to complete.</p>
         </div>
       </div>
     );

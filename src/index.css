@@ -4,6 +4,287 @@ body {
   font-family: sans-serif;
 }
 
-.container {
-  width: 90%;
+label {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/*Section for Splash and Head*/
+
+.fullRight {
+  margin-left: 90%;
+  margin-right: 2%;
+  width: 7%;
+  margin-top: 10px;
+}
+
+#wrapperSpecificQ {
+  margin-left: 22%;
+  margin-right: 22%;
+  background-color: lightblue;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 2% 1fr 1fr 1fr 1fr 2%;
+  grid-template-rows: auto 30px auto;
+  align-items: center;
+}
+
+#specificQSelectors {
+  display: inline-grid;
+  grid-column: 3/5;
+  grid-row: 1;
+}
+
+#specificQSubmit {
+  justify-self: right;
+  grid-column: 3/4;
+  grid-row: 2;
+}
+
+#randomQSubmit {
+  justify-self: left;
+  grid-column: 4/5;
+  grid-row: 2;
+}
+
+#none {
+  grid-row: 3;
+  grid-column: 3/5;
+}
+
+#wrapperStats {
+  display: grid;
+  grid-template-rows: auto 30px;
+  grid-template-columns: 1fr auto 1fr;
+}
+
+#statsSuccesses {
+  display: grid;
+  grid-row: 1;
+  grid-column: 1;
+  align-items: top;
+}
+
+#statsPie {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+#statsFailures {
+  display: grid;
+  grid-row: 1;
+  grid-column: 3;
+  align-items: top;
+}
+
+#addQ {
+  width: auto;
+  border-radius: 5px;
+  grid-row: 2;
+  grid-column: 2;
+}
+
+/*Section for Results*/
+
+.sizedResults {
+  margin-left: 33%;
+  margin-right: 33%;
+  width: auto;
+}
+
+#wrapperResults {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 40px auto 40px;
+  justify-items: center;
+  align-items: center;
+}
+
+#resultsSuccess {
+  display: inline-grid;
+  grid-row: 1;
+  grid-column: 2/3;
+}
+
+#resultsMinutes {
+  display: inline-grid;
+  grid-row: 1;
+  grid-column: 3/4;
+}
+
+#resultsAnswer {
+  display: inline-grid;
+  grid-row: 2;
+  grid-column: 2/4;
+}
+
+#resultsSubmit {
+  grid-row: 3;
+  grid-column: 2/4;
+}
+
+/*Section for history elements*/
+
+#wrapperPast {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 10px 50px auto 50px 50px 10px;
+  justify-items: center;
+  align-items: center;
+}
+
+#pastTitle {
+  text-decoration: underline;
+  grid-row: 1;
+  grid-column: 2/4;
+}
+
+#pastAnswer {
+  grid-row: 2;
+  grid-column: 2/4;
+}
+
+#pastResult {
+  display:grid;
+  justify-items: center;
+  grid-row: 3;
+  grid-column: 2/4;
+}
+
+#pastInfo {
+  grid-row: 4;
+  grid-column: 2/4;
+}
+
+/*Section for prompt elements*/
+
+#wrapperPrompt {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 10px 30px 80px 50px .2fr .2fr 10px;
+  justify-items: center;
+  align-items: center;
+}
+
+#promptTitle {
+  grid-row: 2;
+  grid-column: 2 / 4;
+}
+
+#promptPrompt {
+  align-self: center;
+  grid-row: 3;
+  grid-column: 2 / 4;
+}
+
+#promptOutputs {
+  grid-row: 4;
+  grid-column: 2 / 4;
+}
+
+#promptExtras {
+  display: grid;
+  grid-row: 5;
+  grid-column: 2/4;
+  justify-items: center;
+}
+
+#promptButtons {
+  display: grid;
+  grid-row: 6;
+  grid-column: 2/4;
+  justify-items: center;
+}
+
+#promptBack {
+  margin-top: 10px;
+  grid-row: 7;
+  grid-column: 2/4;
+}
+
+/*Section for newQ elements*/
+
+#wrapperNewQ {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 6fr 1fr;
+  justify-items: center;
+}
+
+#newQTitle {
+  justify-self: center;
+  grid-row: 1;
+  grid-column: 2;
+}
+
+#newQForm {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: .2fr .6fr .2fr;
+}
+
+#newQtop {
+  justify-self: center;
+  grid-row: 1;
+  grid-column: 1 / 4;
+}
+
+#newQleft {
+  justify-content: center;
+  grid-row: 2 / 4;
+  grid-column: 1;
+}
+
+#newQright {
+  grid-row: 2 / 4;
+  grid-column: 2 / 4;
+  align-items: center;
+  display: inline-grid;
+  justify-items: center;
+}
+
+#newQSubmit {
+  grid-row: 3 / 4;
+  grid-column: 1;
+  background-color: lightgreen;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#newQBack {
+  background-color: pink;
+  border-radius: 5px;
+  width: 80px;
+  height: 30px;
+  grid-row: 3;
+  grid-column: 2;
+}
+
+/*Section for login elements*/
+
+#wrapperLogIn {
+  display: grid;
+  grid-template-columns: 25px 1fr 3fr 1fr 25px;
+  grid-template-rows: 50px 1fr 1fr 1fr 50px;
+  justify-items: center;
+  align-items: center;
+
+}
+
+#titleLogIn {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+#formLogIn {
+  grid-column: 3;
+  grid-row: 3;
+  justify-items: center;
+  display: inline-grid;
 }

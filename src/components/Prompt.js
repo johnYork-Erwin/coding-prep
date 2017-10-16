@@ -4,10 +4,13 @@ import axios from 'axios';
 function ExtraInfo(props) {
   if (props.extraInfo) {
     return (
-      <div>
+      <div id="promptExtras">
         <p>Difficulty: {props.question.difficulty}</p>
         <p>Language: {props.question.language}</p>
-        <p>Created By: {props.question.created_by}</p>
+        {props.question.created_by ?
+          <p>Created By: {props.question.created_by}</p> :
+          <p>Created By: Unknown</p>
+        }
       </div>
     )
   } else {
@@ -18,7 +21,6 @@ function ExtraInfo(props) {
 class Prompt extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       extraInfo: false,
     }
@@ -78,34 +80,30 @@ class Prompt extends React.Component {
     if (this.state.question === undefined) {
       return null
     }
+    console.log(this.state)
     return (
-      <div className="container">
-        <h3 className="center">Title: {this.state.question.title}</h3>
-        <p>Prompt: {this.state.question.prompt}</p>
-        <p>Example Outputs: {this.state.question.expected_outputs}</p>
+      <div id="wrapperPrompt">
+        <h3 id="promptTitle">Title: {this.state.question.title}</h3>
+        <p id="promptPrompt">Prompt: {this.state.question.prompt}</p>
+        <p id="promptOutputs">Example Outputs: {this.state.question.expected_outputs}</p>
         <ExtraInfo extraInfo={this.state.extraInfo} question={this.state.question}/>
-        {
-          this.state.extraInfo &&
-          <button onClick={this.extras}> See Less </button>
-        }
-        {
-          !this.state.extraInfo &&
-          <button onClick={this.extras}> See More </button>
-
-        }
-        {  !this.props.historic &&
-          <div>
-            <button onClick={this.finished}> Did It! </button>
-            <button onClick={this.getQuestion}> Reroll </button>
-          </div>
-        }
-        {
-          this.props.historic &&
-          <div>
-            <button onClick={this.finished}> Redid it! </button>
-          </div>
-        }
-        <button onClick={() => window.location.href='/'}>Back</button>
+        <div id="promptButtons">
+          {
+            this.state.extraInfo ?
+            <button onClick={this.extras}> See Less </button> :
+            <button onClick={this.extras}> See More </button>
+          }
+          {  !this.props.historic ?
+            <div>
+              <button onClick={this.finished}> Did It! </button>
+              <button onClick={this.getQuestion}> Reroll </button>
+            </div> :
+            <div>
+              <button onClick={this.finished}> Redid it! </button>
+            </div>
+          }
+        </div>
+        <button id="promptBack" onClick={() => window.location.href='/'}>Back</button>
       </div>
     );
   }

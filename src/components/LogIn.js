@@ -50,20 +50,28 @@ class LogIn extends React.Component {
   }
 
   render(){
+    let styles = {
+      justifySelf: 'center',
+      marginTop: 5,
+      marginBottom: 5,
+      borderRadius: 5,
+      gridColumn: 2/3,
+    }
     return(
-      <div>
-        <h1>Hello LogIn </h1>
-        <form name="form">
+      <div id="wrapperLogIn">
+        <h2 id="titleLogIn">Welcome, log in or create user here.</h2>
+        <form name="form" id="formLogIn">
           <label>
             Username:
           </label>
           <input type="text" name="username" value={this.state.username} placeholder="username" onChange={this.handleChange}/>
+          <br></br>
           <label>
             Password:
           </label>
           <input type="text" name="password" value={this.state.password} placeholder="password" onChange={this.handleChange}/>
-          <button type="submit" name="create" onClick={this.handleSubmit}> Create User </button>
-          <button type="submit" name="login" onClick={this.handleSubmit}> Log In </button>
+          <button style={styles} type="submit" name="create" onClick={this.handleSubmit}> Create User </button>
+          <button style={styles} type="submit" name="login" onClick={this.handleSubmit}> Log In </button>
         </form>
       </div>
     );
