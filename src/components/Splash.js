@@ -9,21 +9,52 @@ class Splash extends React.Component {
     super(props);
     this.getQuestion = this.getQuestion.bind(this)
     this.thisQuestion = this.thisQuestion.bind(this)
+    this.postLoad = this.postLoad.bind(this)
     this.state = {
-      thereAreNone: ''
+      thereAreNone: '',
+      username: undefined,
     }
   }
 
   getQuestion() {
-    axios.get('/questions')
-      .then((response) => {
-        let index = Math.floor(Math.random()*response.data.length)
-        let id = response.data[index].id;
-        window.location.href = `/${id}/prompt`;
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    if (this.state.username) {
+      axios.get('/results/failures')
+        .then((results) => {
+          console.log(results, 'in results failures')
+          if (results.data.length > 0) {
+            let index = Math.floor(Math.random()*results.data.length)
+            let id = results.data[index].id
+            window.location.href = `/${id}/prompt`;
+          } else {
+            axios.get('/questions/none')
+              .then((results) => {
+                console.log(results, 'inresults none')
+                if (results.data.length > 0) {
+                  let index = Math.floor(Math.random()*results.data.length)
+                  let id = results.data[index].id
+                  window.location.href = `/${id}/prompt`;
+                } else {
+                  axios.get('/questions')
+                  .then((response) => {
+                    console.log(response, '/questions')
+                    let index = Math.floor(Math.random()*response.data.length)
+                    let id = response.data[index].id;
+                    window.location.href = `/${id}/prompt`;
+                  })
+                  .catch((err) => {
+                    console.log(err)
+                  })
+                }
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 
   thisQuestion(event) {
@@ -48,10 +79,26 @@ class Splash extends React.Component {
       })
   }
 
+  postLoad() {
+    if (this.props.loggedIn) {
+      axios.get('/users/username').then((result) => {
+        this.setState({
+          username: result.data[0].username,
+        })
+      }).catch((err) => console.log(err))
+    }
+  }
+
   render(){
+    if (this.props.loggedIn && !this.state.username) {
+      this.postLoad();
+    }
     return(
       <div>
-        <h1 className="center">Welcome!</h1>
+        {this.props.loggedIn ?
+          <h1 className="center">Welcome "{this.state.username}"!</h1> :
+          <h1 className="center">Hello stranger!</h1>
+        }
         <h2 className="center">Lets get you a problem...</h2>
         <form id="wrapperSpecificQ" name="form" onSubmit={this.thisQuestion}>
           <div id="specificQSelectors">

@@ -17,9 +17,19 @@ const authorize = function(req, res, next) {
 };
 
 router.get('/questions', (req, res, next) => {
-  knex('questions')
+  knex('questions').select('questions.id')
     .then((questions) => {
       res.send(questions);
+    })
+    .catch((err) => next(err));
+})
+
+router.get('/questions/none', authorize, (req, res, next) => {
+  let user = req.claim.userId;
+  knex('questions').innerJoin('results', 'results.question_id', 'questions.id').where('results.correct', false).andWhere('results.user_id', user)
+    .select('questions.id')
+    .then((questions) => {
+      return res.send(questions);
     })
     .catch((err) => next(err));
 })
@@ -36,7 +46,7 @@ router.get('/questions/:duration/:language/:difficulty', (req, res, next) => {
 })
 
 router.get('/questions/:id', (req, res, next) => {
-  knex('questions').where('id', req.params.id)
+  knex('questions').where('questions.id', req.params.id).innerJoin('users', 'questions.created_by', 'users.id').select('users.username as created_by', 'questions.answer', 'questions.difficulty', 'questions.duration', 'questions.expected_outputs', 'questions.id as id', 'questions.language', 'questions.prompt', 'questions.title')
     .then((question) => {
       res.send(question);
     })

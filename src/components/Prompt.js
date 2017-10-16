@@ -7,10 +7,7 @@ function ExtraInfo(props) {
       <div id="promptExtras">
         <p>Difficulty: {props.question.difficulty}</p>
         <p>Language: {props.question.language}</p>
-        {props.question.created_by ?
-          <p>Created By: {props.question.created_by}</p> :
-          <p>Created By: Unknown</p>
-        }
+        <p>Created By: {props.question.created_by}</p> :
       </div>
     )
   } else {
@@ -80,7 +77,6 @@ class Prompt extends React.Component {
     if (this.state.question === undefined) {
       return null
     }
-    console.log(this.state)
     return (
       <div id="wrapperPrompt">
         <h3 id="promptTitle">Title: {this.state.question.title}</h3>

@@ -235,7 +235,7 @@ label {
 }
 
 #newQleft {
-  justify-content: center;
+  justify-items: center;
   grid-row: 2 / 4;
   grid-column: 1;
 }

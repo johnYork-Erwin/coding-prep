@@ -5,7 +5,7 @@ const questions = [ {
     'difficulty': 'Easy',
     'language': 'JavaScript',
     'title': 'Off With The Head!',
-    'created_by': null,
+    'created_by': 1,
     'duration': 30
   }, {
     'prompt': "Write a function that accepts an integer and returns a boolean expressing whether or not that number is prime.",
@@ -14,7 +14,7 @@ const questions = [ {
     'difficulty': 'Easy',
     'language': 'JavaScript',
     'title': 'Is It Prime?',
-    'created_by': null,
+    'created_by': 1,
     'duration': 30
   }
 ];
