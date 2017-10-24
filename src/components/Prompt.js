@@ -7,7 +7,7 @@ function ExtraInfo(props) {
       <div id="promptExtras">
         <p>Difficulty: {props.question.difficulty}</p>
         <p>Language: {props.question.language}</p>
-        <p>Created By: {props.question.created_by}</p> :
+        <p>Created By: "{props.question.created_by}"</p>
       </div>
     )
   } else {

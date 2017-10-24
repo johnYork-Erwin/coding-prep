@@ -54,6 +54,17 @@ class Splash extends React.Component {
         .catch((err) => {
           console.log(err)
         })
+    } else {
+      axios.get('/questions')
+      .then((response) => {
+        console.log(response, '/questions')
+        let index = Math.floor(Math.random()*response.data.length)
+        let id = response.data[index].id;
+        window.location.href = `/${id}/prompt`;
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
   }
 
