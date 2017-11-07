@@ -35,9 +35,6 @@ router.post('/token', (req, res, next) => {
     .catch(bcrypt.MISMATCH_ERROR, () => {
       throw boom.create(400, 'Bad username or password');
     })
-    .catch((err) => {
-      return next(err);
-    })
 })
 
 router.get('/token', (req, res) => {

@@ -13,6 +13,7 @@ class PastTry extends React.Component {
       }
     }
   }
+  
 
   render() {
     return (
